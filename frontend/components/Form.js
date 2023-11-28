@@ -3,35 +3,25 @@ import axios from 'axios'
 
 export default class Form extends React.Component {
 
-  state = {
-    todoNameInput: '',
-  }
-
-  onTodoNameInputChange = evt => {
-    const{ value } = evt.target
-    this.setState({...this.state, todoNameInput: value })
-  }
-  
-  // postNewTodo = () => {
-  //   axios.post(URL, { name: this.state.todoNameInput})
-  //     .then(res => {
-  //       debugger
-  //     })
-  //     .catch(err => {
-  //       debugger
-  //     })
-  // }
-
-  onTodoFormSubmit= evt => {
-    evt.preventDefault()
-    this.postNewTodo
-  }
-
   render() {
+    
     return(
-    <input value={this.state.todoNameInput} onChange = {this.onTodoNameInputChange} type='text' placeholder="Type Todo"></input> 
-    // <input value={} type="submit"/>
-    // <input type="submit"><
+      <>
+      <form id="todoForm" onSubmit={this.props.onTodoFormSubmit}>
+      <input 
+        value={this.props.todoNameInput} 
+        onChange = {this.props.onTodoNameInputChange} 
+        type="text" 
+        placeholder='Type todo'>
+      </input>
+      <input type="submit"></input>
+    </form>
+    <button 
+      onClick={this.props.toggleDisplayCompleteds}
+      >
+        {this.props.displayCompleteds ? 'Hide' : 'Show'} Clear Completed
+        </button>
+      </>
     )
   }
 }
